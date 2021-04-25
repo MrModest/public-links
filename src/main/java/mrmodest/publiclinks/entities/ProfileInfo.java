@@ -3,19 +3,29 @@ package mrmodest.publiclinks.entities;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import java.util.Date;
 
 @Getter
 @AllArgsConstructor
+@Entity
 public class ProfileInfo {
-    private final long id;
-    private final String avatar;
-    private final String firstName;
-    private final String lastName;
-    private final String nickname;
-    private final Date dateOfBirth;
-    private final String about;
-    private final String language;
 
-    private final long userId;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private long id;
+    private String avatar;
+    private String firstName;
+    private String lastName;
+    private String nickname;
+    private Date dateOfBirth;
+    private String about;
+    private String language;
+
+    private long userId;
+
+    protected ProfileInfo(){}
 }
