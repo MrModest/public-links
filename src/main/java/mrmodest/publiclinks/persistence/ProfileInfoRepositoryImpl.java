@@ -1,5 +1,8 @@
 package mrmodest.publiclinks.persistence;
 
+import java.util.Optional;
+
+import mrmodest.publiclinks.persistence.jpa.ProfileInfoDataRepository;
 import org.springframework.stereotype.Repository;
 
 import mrmodest.publiclinks.entities.ProfileInfo;
@@ -20,8 +23,8 @@ public class ProfileInfoRepositoryImpl implements ProfileInfoRepository {
     }
 
     @Override
-    public ProfileInfo get(long id) {
-        return profileInfoDataRepository.getOne(id);
+    public Optional<ProfileInfo> find(long id) {
+        return profileInfoDataRepository.findById(id);
     }
 
     @Override

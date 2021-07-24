@@ -1,8 +1,12 @@
 package mrmodest.publiclinks.persistence;
 
+import java.util.Optional;
+
+import mrmodest.publiclinks.persistence.jpa.BundleDataRepository;
+import org.springframework.stereotype.Repository;
+
 import mrmodest.publiclinks.entities.Bundle;
 import mrmodest.publiclinks.entities.repositories.BundleRepository;
-import org.springframework.stereotype.Repository;
 
 @Repository
 public class BundleRepositoryImpl implements BundleRepository {
@@ -19,8 +23,8 @@ public class BundleRepositoryImpl implements BundleRepository {
     }
 
     @Override
-    public Bundle get(long id) {
-        return bundleDataRepository.getOne(id);
+    public Optional<Bundle> find(long id) {
+        return bundleDataRepository.findById(id);
     }
 
     @Override

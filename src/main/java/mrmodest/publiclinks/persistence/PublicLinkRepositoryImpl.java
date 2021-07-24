@@ -1,5 +1,8 @@
 package mrmodest.publiclinks.persistence;
 
+import java.util.Optional;
+
+import mrmodest.publiclinks.persistence.jpa.PublicLinkDataRepository;
 import org.springframework.stereotype.Repository;
 
 import mrmodest.publiclinks.entities.PublicLink;
@@ -20,8 +23,8 @@ public class PublicLinkRepositoryImpl implements PublicLinkRepository {
     }
 
     @Override
-    public PublicLink get(long id) {
-        return publicLinkDataRepository.getOne(id);
+    public Optional<PublicLink> find(long id) {
+        return publicLinkDataRepository.findById(id);
     }
 
     @Override
