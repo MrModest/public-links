@@ -2,11 +2,12 @@ package mrmodest.publiclinks.persistence;
 
 import java.util.Optional;
 
-import mrmodest.publiclinks.persistence.jpa.BundleDataRepository;
 import org.springframework.stereotype.Repository;
 
 import mrmodest.publiclinks.entities.Bundle;
 import mrmodest.publiclinks.entities.repositories.BundleRepository;
+import mrmodest.publiclinks.persistence.jpa.BundleDataRepository;
+import mrmodest.publiclinks.utils.PersistenceUtils;
 
 @Repository
 public class BundleRepositoryImpl implements BundleRepository {
@@ -29,14 +30,13 @@ public class BundleRepositoryImpl implements BundleRepository {
 
     @Override
     public Bundle add(Bundle newBundle) {
+        PersistenceUtils.CheckIsNew(newBundle);
         return bundleDataRepository.save(newBundle);
     }
 
     @Override
     public Bundle update(Bundle updated) {
-        if (updated.getId() <= 0) {
-            throw new IllegalArgumentException("You trying update bundle without 'id'!");
-        }
+        PersistenceUtils.CheckIsNotNew(updated);
         return bundleDataRepository.save(updated);
     }
 }

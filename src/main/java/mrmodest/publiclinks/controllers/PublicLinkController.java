@@ -4,6 +4,7 @@ import org.springframework.web.bind.annotation.*;
 
 import mrmodest.publiclinks.entities.PublicLink;
 import mrmodest.publiclinks.entities.repositories.PublicLinkRepository;
+import mrmodest.publiclinks.utils.AuthUtils;
 
 @RestController
 public class PublicLinkController {
@@ -22,11 +23,13 @@ public class PublicLinkController {
 
     @PutMapping("/api/public-links")
     public PublicLink edit(PublicLink publicLink){
+        AuthUtils.CheckOwner(publicLink);
         return publicLinkRepository.update(publicLink);
     }
 
     @PostMapping("/api/public-links")
     public PublicLink add(PublicLink publicLink){
+        AuthUtils.CheckOwner(publicLink);
         return publicLinkRepository.add(publicLink);
     }
 }

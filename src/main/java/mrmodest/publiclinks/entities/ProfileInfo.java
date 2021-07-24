@@ -1,18 +1,18 @@
 package mrmodest.publiclinks.entities;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-
+import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import java.util.Date;
+
+import lombok.AllArgsConstructor;
+import lombok.Getter;
 
 @Getter
 @AllArgsConstructor
 @Entity
-public class ProfileInfo {
+public class ProfileInfo implements IsEntity, HasOwner {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

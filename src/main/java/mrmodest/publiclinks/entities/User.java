@@ -11,16 +11,12 @@ import lombok.Getter;
 @Getter
 @AllArgsConstructor
 @Entity
-public class Bundle implements IsEntity, HasOwner {
+public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
-    private String title;
-    private String description;
-    private String language;
+    private String username;
 
-    private long userId;
-
-    protected Bundle(){}
+    protected User() {}
 }

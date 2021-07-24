@@ -2,11 +2,12 @@ package mrmodest.publiclinks.persistence;
 
 import java.util.Optional;
 
-import mrmodest.publiclinks.persistence.jpa.PublicLinkDataRepository;
 import org.springframework.stereotype.Repository;
 
 import mrmodest.publiclinks.entities.PublicLink;
 import mrmodest.publiclinks.entities.repositories.PublicLinkRepository;
+import mrmodest.publiclinks.persistence.jpa.PublicLinkDataRepository;
+import mrmodest.publiclinks.utils.PersistenceUtils;
 
 @Repository
 public class PublicLinkRepositoryImpl implements PublicLinkRepository {
@@ -28,15 +29,14 @@ public class PublicLinkRepositoryImpl implements PublicLinkRepository {
     }
 
     @Override
-    public PublicLink add(PublicLink newBundle) {
-        return publicLinkDataRepository.save(newBundle);
+    public PublicLink add(PublicLink newPublicLink) {
+        PersistenceUtils.CheckIsNew(newPublicLink);
+        return publicLinkDataRepository.save(newPublicLink);
     }
 
     @Override
     public PublicLink update(PublicLink updated) {
-        if (updated.getId() <= 0) {
-            throw new IllegalArgumentException("You trying update bundle without 'id'!");
-        }
+        PersistenceUtils.CheckIsNotNew(updated);
         return publicLinkDataRepository.save(updated);
     }
 }

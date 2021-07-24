@@ -1,6 +1,7 @@
 package mrmodest.publiclinks.persistence.jpa;
 
 import java.util.List;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import mrmodest.publiclinks.entities.Bundle;

@@ -2,11 +2,12 @@ package mrmodest.publiclinks.persistence;
 
 import java.util.Optional;
 
-import mrmodest.publiclinks.persistence.jpa.ProfileInfoDataRepository;
 import org.springframework.stereotype.Repository;
 
 import mrmodest.publiclinks.entities.ProfileInfo;
 import mrmodest.publiclinks.entities.repositories.ProfileInfoRepository;
+import mrmodest.publiclinks.persistence.jpa.ProfileInfoDataRepository;
+import mrmodest.publiclinks.utils.PersistenceUtils;
 
 @Repository
 public class ProfileInfoRepositoryImpl implements ProfileInfoRepository {
@@ -28,15 +29,14 @@ public class ProfileInfoRepositoryImpl implements ProfileInfoRepository {
     }
 
     @Override
-    public ProfileInfo add(ProfileInfo newBundle) {
-        return profileInfoDataRepository.save(newBundle);
+    public ProfileInfo add(ProfileInfo newProfileInfo) {
+        PersistenceUtils.CheckIsNew(newProfileInfo);
+        return profileInfoDataRepository.save(newProfileInfo);
     }
 
     @Override
     public ProfileInfo update(ProfileInfo updated) {
-        if (updated.getId() <= 0) {
-            throw new IllegalArgumentException("You trying update bundle without 'id'!");
-        }
+        PersistenceUtils.CheckIsNotNew(updated);
         return profileInfoDataRepository.save(updated);
     }
 }
